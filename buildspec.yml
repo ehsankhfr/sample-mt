@@ -20,7 +20,7 @@ phases:
       - cp -R .ebextensions ../temp/bundle/
       - cp ./bundle.package.json ../temp/bundle/package.json
       - cd ../temp/bundle/programs/server && npm install --production
-      - cd ../../..
+      - cd ../..
   post_build:
     commands:
       - echo Build completed on `date`
