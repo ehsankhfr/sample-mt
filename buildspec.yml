@@ -17,9 +17,9 @@ phases:
       - sudo chown -Rh root .meteor/local
       - mkdir ../temp
       - meteor build ../temp --architecture os.linux.x86_64 --allow-superuser --directory
-      - cp -R .ebextensions ../temp/
-      - cp ./bundle.package.json ../temp/package.json
-      - cd ../temp/programs/server && npm install --production
+      - cp -R .ebextensions ../temp/bundle/
+      - cp ./bundle.package.json ../temp/bundle/package.json
+      - cd ../temp/bundle/programs/server && npm install --production
       - cd ../../..
   post_build:
     commands:
