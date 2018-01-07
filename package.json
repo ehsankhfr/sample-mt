@@ -1,11 +1,15 @@
 {
-  "name": "abcd",
-  "private": true,
+  "name": "Your awesome app name",
+  "version": "0.0.1",
   "scripts": {
-    "start": "meteor run"
+    "start": "node main.js"
   },
   "dependencies": {
-    "babel-runtime": "^6.26.0",
-    "meteor-node-stubs": "^0.3.2"
+    "bcrypt": "*",
+    "fibers": "*",
+    "forever": "*",
+    "semver": "*",
+    "source-map-support": "*",
+    "underscore": "*"
   }
 }
