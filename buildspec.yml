@@ -1,0 +1,51 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing Meteor
+      - curl https://install.meteor.com/ | sh
+  pre_build:
+    commands:
+      - echo Displaying folder structure
+      - ls
+  build:
+    commands:
+      - echo Build started on `date`
+      - whoami
+      - meteor npm i --production
+      - sudo chown -Rh root .meteor/local
+      - mkdir ../temp
+      - meteor build ../temp --architecture os.linux.x86_64 --allow-superuser --directory
+      - cd ../temp/bundle
+      - echo '{' >> package.json
+      - echo '"name": "Your awesome app name",' >> package.json
+      - echo '"version": "0.0.1",' >> package.json
+      - echo '"scripts": {' >> package.json
+      - echo '"start": "node main.js"' >> package.json
+      - echo '},' >> package.json
+      - echo '"dependencies": {' >> package.json
+      - echo '"bcrypt": "*",' >> package.json
+      - echo '"fibers": "*",' >> package.json
+      - echo '"forever": "*",' >> package.json
+      - echo '"semver": "*",' >> package.json
+      - echo '"source-map-support": "*",' >> package.json
+      - echo '"underscore": "*"' >> package.json
+      - echo '}' >> package.json
+      - echo '}' >> package.json
+      - mkdir .ebextensions
+      - cd .ebextensions
+      - echo 'option_settings:' >> node-settings.config
+      - echo '  aws:elasticbeanstalk:container:nodejs:' >> node-settings.config
+      - echo '    NodeCommand: "npm start"' >> node-settings.config
+      - cd ..
+      - cd programs/server && npm install --production
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - cd ../../..
+      - pwd
+      - ls -a
+artifacts:
+  files:
+    - './**/*'
