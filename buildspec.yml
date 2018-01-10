@@ -14,8 +14,8 @@ phases:
       - echo Build started on `date`
       - pwd
       - mkdir ../original
-      - shopt -s dotglob
-      - mv ./* ../original
+      - cp -R ./* ../original
+      - rm -rf *
       - cd ../original 
       - meteor npm i --production
       - sudo chown -Rh root .meteor/local
