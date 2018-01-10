@@ -12,20 +12,17 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - pwd
-      - mkdir ../original
-      - cp -R ./* ../original
-      - rm -rf *
-      - cd ../original 
+      - pwd 
       - meteor npm i --production
       - sudo chown -Rh root .meteor/local
-      - meteor build ../src --architecture os.linux.x86_64 --allow-superuser --directory
-      - cp -R .ebextensions ../src/bundle/
-      - cp ./bundle.package.json ../src/bundle/package.json
-      - cd ../src/bundle
+      - mkdir ../BUILD
+      - meteor build ../BUILD --architecture os.linux.x86_64 --allow-superuser --directory
+      - cp -R ../BUILD/bundle ./
+      - cp -R .ebextensions ./bundle/
+      - cp ./bundle.package.json ./bundle/package.json
+      - cd bundle
       - meteor npm i bcrypt -S
       - cd programs/server && npm install --production
-      - cd ../..
   post_build:
     commands:
       - echo Build completed on `date`
