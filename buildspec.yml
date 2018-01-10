@@ -14,11 +14,13 @@ phases:
       - echo Build started on `date`
       - meteor npm i --production
       - sudo chown -Rh root .meteor/local
-      - mkdir ../temp
-      - meteor build ../temp --architecture os.linux.x86_64 --allow-superuser --directory
-      - cp -R .ebextensions ../temp/bundle/
-      - cp ./bundle.package.json ../temp/bundle/package.json
-      - cd ../temp/bundle
+      - mkdir ../original
+      - mv * ../original
+      - cd ../original 
+      - meteor build ../src --architecture os.linux.x86_64 --allow-superuser --directory
+      - cp -R .ebextensions ../src/bundle/
+      - cp ./bundle.package.json ../src/bundle/package.json
+      - cd ../src/bundle
       - meteor npm i bcrypt -S
       - cd programs/server && npm install --production
       - cd ../..
@@ -29,4 +31,4 @@ phases:
       - ls -a
 artifacts:
   files:
-    - '../temp/bundle/**/*'
+    - './**/*'
