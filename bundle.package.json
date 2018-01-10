@@ -1,11 +1,9 @@
 {
-  "name": "Your awesome app name",
+  "name": "bundle01",
   "version": "0.0.1",
-  "scripts": {
-    "start": "node main.js"
-  },
   "dependencies": {
-    "bcrypt": "*",
+    "babel-runtime": "*",
+    "bcrypt": "^1.0.3",
     "fibers": "*",
     "forever": "*",
     "semver": "*",
