@@ -4,23 +4,23 @@ phases:
   install:
     commands:
       - echo Install started on `date`
-      - echo [Install-1]: Installing Meteor
+      - echo [Install-1] Installing Meteor
       - curl https://install.meteor.com/ | sh
   pre_build:
     commands:
       - echo Pre-Build started on `date`
-      - echo [Pre-Build-1]: Displaying folder structure
+      - echo [Pre-Build-1] Displaying folder structure
       - ls
   build:
     commands:
       - echo Build started on `date`
-      - echo [Build-1]: install dependencies
+      - echo [Build-1] install dependencies
       - meteor npm i --production
-      - echo [Build-2]: Bundle build
+      - echo [Build-2] Bundle build
       - sudo chown -Rh root .meteor/local
       - mkdir ../BUILD
       - meteor build ../BUILD --architecture os.linux.x86_64 --allow-superuser --directory
-      - echo [Build-3]: Bundle post-build
+      - echo [Build-3] Bundle post-build
       - cp -R ../BUILD/bundle ./
       - cp -R .ebextensions ./bundle/
       - cp ./bundle.package.json ./bundle/package.json
@@ -30,7 +30,7 @@ phases:
   post_build:
     commands:
       - echo Post-Build started on `date`
-      - echo [Post-Build-1]: Displaying folder structure
+      - echo [Post-Build-1] Displaying folder structure
       - ls -a
 artifacts:
   files:
