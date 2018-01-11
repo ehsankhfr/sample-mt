@@ -11,27 +11,26 @@ phases:
       - echo Pre-Build started on `date`
       - echo [Pre-Build-1] Display folder structure
       - ls
+      - echo [Pre-Build-2] Install dependencies
+      - meteor npm i --production
   build:
     commands:
       - echo Build started on `date`
-      - echo [Build-1] Install dependencies
-      - meteor npm i --production
-      - echo [Build-2] Bundle build
+      - echo [Build-1] Bundle build
       - sudo chown -Rh root .meteor/local
       - mkdir ../BUILD
       - meteor build ../BUILD --architecture os.linux.x86_64 --allow-superuser --directory
-      - echo [Build-3] Bundle post-build
-      - cp -R ../BUILD/bundle ./
-      - cp -R .ebextensions ./bundle/
-      - cp ./bundle.package.json ./bundle/package.json
-      - cd bundle
-      - meteor npm i bcrypt -S
-      - cd programs/server && npm install --production
   post_build:
     commands:
       - echo Post-Build started on `date`
       - echo [Post-Build-1] Display folder structure
       - ls -a
+      - echo [Post-Build-2] Bundle configuration
+      - cp -R ../BUILD/bundle ./
+      - cp ./bundle.package.json ./bundle/package.json
+      - cd bundle
+      - meteor npm i bcrypt -S
+      - cd programs/server && npm install --production
 artifacts:
   files:
     - './**/*'
